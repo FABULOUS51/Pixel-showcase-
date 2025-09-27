@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelPulse Gallery Pro</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#6366f1',
+              secondary: '#10b981',
+            }
+          }
+        }
+      }
+    </script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+      body {
+        font-family: 'Montserrat', sans-serif;
+      }
+      .gallery-item {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .gallery-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+      .star-rating input {
+        display: none;
+      }
+      .star-rating label {
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: #d1d5db;
+        transition: color 0.2s;
+      }
+      .star-rating input:checked ~ label,
+      .star-rating input:hover ~ label {
+        color: #f59e0b;
+      }
+      .parallax-bg {
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      .filter-btn.active {
+        background-color: #6366f1;
+        color: white;
+      }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <!-- Hero Section with Vanta.js Background -->
+  <div id="vanta-bg" class="min-h-screen flex flex-col justify-center items-center text-center px-4 relative overflow-hidden">
+    <div class="absolute inset-0 bg-black bg-opacity-50 z-10"></div>
+    <div class="relative z-20 max-w-4xl mx-auto">
+      <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in">PixelPulse Gallery Pro</h1>
+      <p class="text-xl md:text-2xl text-gray-200 mb-10">Where every pixel tells a story</p>
+      <a href="#gallery" class="inline-block bg-primary hover:bg-primary-600 text-white font-medium py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
+        Explore Gallery
+      </a>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-white bg-opacity-90 backdrop-filter backdrop-blur-lg shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16 items-center">
+        <div class="flex-shrink-0 flex items-center">
+          <span class="text-primary font-bold text-xl">PixelPulse</span>
+        </div>
+        <div class="hidden md:block">
+          <div class="ml-10 flex items-center space-x-8">
+            <a href="#gallery" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Gallery</a>
+            <a href="#categories" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Categories</a>
+            <a href="#about" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium">About</a>
+            <a href="#contact" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+          </div>
+        </div>
+        <div class="flex items-center space-x-4">
+          <button class="p-2 rounded-full hover:bg-gray-100">
+            <i data-feather="search"></i>
+          </button>
+          <button class="p-2 rounded-full hover:bg-gray-100">
+            <i data-feather="user"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl font-bold text-gray-900 mb-4">Featured Works</h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">Professionally curated collection of visually stunning images</p>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div id="categories" class="flex flex-wrap justify-center gap-2 mb-12">
+      <button class="filter-btn active px-4 py-2 rounded-full text-sm font-medium bg-gray-100 hover:bg-primary hover:text-white transition-colors" data-filter="all">All</button>
+      <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 hover:bg-primary hover:text-white transition-colors" data-filter="nature">Nature</button>
+      <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 hover:bg-primary hover:text-white transition-colors" data-filter="urban">Urban</button>
+      <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 hover:bg-primary hover:text-white transition-colors" data-filter="portrait">Portrait</button>
+      <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 hover:bg-primary hover:text-white transition-colors" data-filter="abstract">Abstract</button>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Gallery Item 1 -->
+      <div class="gallery-item nature" data-category="nature">
+        <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+          <div class="relative overflow-hidden h-64">
+            <img src="http://static.photos/nature/640x360/1" alt="Nature Landscape" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 hover:opacity-80 transition-opacity duration-300 flex flex-col justify-end p-6">
+              <h3 class="text-white font-bold text-xl mb-2">Mountain Dawn</h3>
+              <p class="text-gray-200 mb-4">Captured at sunrise in the Swiss Alps</p>
+              <div class="star-rating flex mb-2" data-rating="4.5">
+                <input type="radio" id="star5-1" name="rating-1" value="5"><label for="star5-1">★</label>
+                <input type="radio" id="star4-1" name="rating-1" value="4"><label for="star4-1">★</label>
+                <input type="radio" id="star3-1" name="rating-1" value="3"><label for="star3-1">★</label>
+                <input type="radio" id="star2-1" name="rating-1" value="2"><label for="star2-1">★</label>
+                <input type="radio" id="star1-1" name="rating-1" value="1"><label for="star1-1">★</label>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-gray-300 text-sm">4.5 (128 votes)</span>
+                <button class="text-white hover:text-secondary transition-colors">
+                  <i data-feather="share-2" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gallery Item 2 -->
+      <div class="gallery-item urban" data-category="urban">
+        <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+          <div class="relative overflow-hidden h-64">
+            <img src="http://static.photos/cityscape/640x360/2" alt="Cityscape" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 hover:opacity-80 transition-opacity duration-300 flex flex-col justify-end p-6">
+              <h3 class="text-white font-bold text-xl mb-2">Neon Streets</h3>
+              <p class="text-gray-200 mb-4">Tokyo nightlife in vibrant colors</p>
+              <div class="star-rating flex mb-2" data-rating="4.8">
+                <input type="radio" id="star5-2" name="rating-2" value="5"><label for="star5-2">★</label>
+                <input type="radio" id="star4-2" name="rating-2" value="4"><label for="star4-2">★</label>
+                <input type="radio" id="star3-2" name="rating-2" value="3"><label for="star3-2">★</label>
+                <input type="radio" id="star2-2" name="rating-2" value="2"><label for="star2-2">★</label>
+                <input type="radio" id="star1-2" name="rating-2" value="1"><label for="star1-2">★</label>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-gray-300 text-sm">4.8 (92 votes)</span>
+                <button class="text-white hover:text-secondary transition-colors">
+                  <i data-feather="share-2" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gallery Item 3 -->
+      <div class="gallery-item portrait" data-category="portrait">
+        <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+          <div class="relative overflow-hidden h-64">
+            <img src="http://static.photos/people/640x360/3" alt="Portrait" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 hover:opacity-80 transition-opacity duration-300 flex flex-col justify-end p-6">
+              <h3 class="text-white font-bold text-xl mb-2">Eyes of Wisdom</h3>
+              <p class="text-gray-200 mb-4">Emotional portrait of an elder</p>
+              <div class="star-rating flex mb-2" data-rating="4.2">
+                <input type="radio" id="star5-3" name="rating-3" value="5"><label for="star5-3">★</label>
+                <input type="radio" id="star4-3" name="rating-3" value="4"><label for="star4-3">★</label>
+                <input type="radio" id="star3-3" name="rating-3" value="3"><label for="star3-3">★</label>
+                <input type="radio" id="star2-3" name="rating-3" value="2"><label for="star2-3">★</label>
+                <input type="radio" id="star1-3" name="rating-3" value="1"><label for="star1-3">★</label>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-gray-300 text-sm">4.2 (76 votes)</span>
+                <button class="text-white hover:text-secondary transition-colors">
+                  <i data-feather="share-2" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gallery Item 4 -->
+      <div class="gallery-item abstract" data-category="abstract">
+        <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+          <div class="relative overflow-hidden h-64">
+            <img src="http://static.photos/abstract/640x360/4" alt="Abstract Art" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 hover:opacity-80 transition-opacity duration-300 flex flex-col justify-end p-6">
+              <h3 class="text-white font-bold text-xl mb-2">Color Chaos</h3>
+              <p class="text-gray-200 mb-4">Experimental liquid photography</p>
+              <div class="star-rating flex mb-2" data-rating="4.7">
+                <input type="radio" id="star5-4" name="rating-4" value="5"><label for="star5-4">★</label>
+                <input type="radio" id="star4-4" name="rating-4" value="4"><label for="star4-4">★</label>
+                <input type="radio" id="star3-4" name="rating-4" value="3"><label for="star3-4">★</label>
+                <input type="radio" id="star2-4" name="rating-4" value="2"><label for="star2-4">★</label>
+                <input type="radio" id="star1-4" name="rating-4" value="1"><label for="star1-4">★</label>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-gray-300 text-sm">4.7 (105 votes)</span>
+                <button class="text-white hover:text-secondary transition-colors">
+                  <i data-feather="share-2" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gallery Item 5 -->
+      <div class="gallery-item nature" data-category="nature">
+        <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+          <div class="relative overflow-hidden h-64">
+            <img src="http://static.photos/nature/640x360/5" alt="Wildlife" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 hover:opacity-80 transition-opacity duration-300 flex flex-col justify-end p-6">
+              <h3 class="text-white font-bold text-xl mb-2">Savanna King</h3>
+              <p class="text-gray-200 mb-4">Lion in the Masai Mara</p>
+              <div class="star-rating flex mb-2" data-rating="4.9">
+                <input type="radio" id="star5-5" name="rating-5" value="5"><label for="star5-5">★</label>
+                <input type="radio" id="star4-5" name="rating-5" value="4"><label for="star4-5">★</label>
+                <input type="radio" id="star3-5" name="rating-5" value="3"><label for="star3-5">★</label>
+                <input type="radio" id="star2-5" name="rating-5" value="2"><label for="star2-5">★</label>
+                <input type="radio" id="star1-5" name="rating-5" value="1"><label for="star1-5">★</label>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-gray-300 text-sm">4.9 (142 votes)</span>
+                <button class="text-white hover:text-secondary transition-colors">
+                  <i data-feather="share-2" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gallery Item 6 -->
+      <div class="gallery-item urban" data-category="urban">
+        <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+          <div class="relative overflow-hidden h-64">
+            <img src="http://static.photos/cityscape/640x360/6" alt="Architecture" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+            <div class="absolute inset-
+</body>
+</html>
